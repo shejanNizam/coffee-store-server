@@ -25,8 +25,16 @@ async function run() {
     // Connect the client to the server	(optional starting in v4.7)
     await client.connect();
 
+    const coffeeCollection = client.db("coffeeDB").collection("coffee");
+
     // app.get()
-    // app.post()
+
+    app.post("/coffee", async (req, res) => {
+      const newCoffee = req.body;
+      const result = await coffeeCollection.insertOne(newCoffee);
+      res.send(result);
+    });
+
     // app.put()
     // app.delete()
 
@@ -37,7 +45,7 @@ async function run() {
     );
   } finally {
     // Ensures that the client will close when you finish/error
-    await client.close();
+    // await client.close();
   }
 }
 run().catch(console.dir);
