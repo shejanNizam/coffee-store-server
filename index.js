@@ -27,7 +27,7 @@ async function run() {
 
     const coffeeCollection = client.db("coffeeDB").collection("coffee");
 
-    // app.get()
+    // app.get() --> Read Operation
     app.get("/coffee", async (req, res) => {
       const result = await coffeeCollection.find().toArray();
       res.send(result);
